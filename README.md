@@ -1,61 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Sistem Manajemen Inventori
+Ikhtisar Proyek
+Saya telah membuat sistem manajemen inventori berbasis Laravel sebagai bagian dari tugas UTS. Sistem ini memiliki fitur dashboard untuk melihat ringkasan stok, serta pengelolaan item, kategori, dan pemasok. Untuk mendukung pengembangan, saya menggunakan Docker agar aplikasi dan basis data MySQL dapat dijalankan dengan lebih mudah.
+Langkah-Langkah Pengerjaan Proyek
+Berikut adalah tahapan yang saya lakukan dalam mengerjakan proyek ini:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Inisialisasi Proyek LaravelSaya memulai dengan membuat proyek Laravel baru menggunakan perintah composer create-project laravel/laravel inventory-system. Setelah itu, saya mengatur struktur proyek dan konfigurasi awal pada file .env.
 
-## About Laravel
+Pengaturan Basis DataSaya membuat file migrasi untuk tabel admins, categories, suppliers, dan items sesuai dengan ERD yang diberikan. Saya juga menentukan relasi antar tabel pada model Laravel untuk mempermudah pengelolaan data.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Pembuatan Controller dan RouteSaya membuat controller untuk Dashboard, Item, Category, dan Supplier, serta mengatur route pada file routes/web.php untuk mendukung operasi CRUD.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Pembuatan Tampilan (View)Saya membuat template Blade untuk dashboard serta halaman CRUD untuk item, kategori, dan pemasok, sehingga pengguna dapat dengan mudah mengelola data.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Pengaturan DockerSaya membuat file docker-compose.yml untuk menjalankan aplikasi dan basis data MySQL. Saya juga membuat file Dockerfile untuk membangun container aplikasi PHP. Variabel lingkungan saya sesuaikan agar sesuai dengan pengaturan di file .env.
 
-## Learning Laravel
+PengujianSaya menjalankan migrasi dengan perintah docker-compose exec app php artisan migrate, lalu menguji semua fitur dengan mengakses aplikasi di http://localhost:8000. Saya memastikan semua fungsi berjalan dengan baik.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Cara Menjalankan Proyek
+Berikut adalah langkah-langkah untuk menjalankan proyek ini:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Kloning RepositoryKlon repository ini ke komputer Anda dengan perintah:  
+git clone <URL_REPOSITORY_ANDA>
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Pastikan Docker TerinstalPastikan Docker dan Docker Compose sudah terinstal di komputer Anda.
 
-### Premium Partners
+Konfigurasi File .envSalin file .env.example menjadi .env, lalu sesuaikan konfigurasinya. Pastikan DB_HOST diatur ke mysql.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+Jalankan ContainerJalankan perintah berikut untuk membangun dan menjalankan container:  
+docker-compose up -d --build
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Jalankan Migrasi atau Impor Basis DataSaya telah menyertakan file SQL hasil ekspor dari basis data saya, yaitu uts_inventory.sql, di dalam repository ini. Anda dapat mengimpornya ke MySQL dengan perintah:  
+docker-compose exec mysql mysql -u root uts_inventory < uts_inventory.sql
 
-## Code of Conduct
+Alternatifnya, Anda juga dapat menjalankan migrasi untuk membuat tabel dari awal:  
+docker-compose exec app php artisan migrate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+Akses AplikasiBuka browser dan akses aplikasi di:  
+http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Fitur Proyek
+Proyek ini memiliki beberapa fitur utama, yaitu:  
+
+Dashboard yang menampilkan ringkasan stok, peringatan stok rendah, serta laporan per kategori dan pemasok.  
+Fitur CRUD (Create dan Read) untuk item, kategori, dan pemasok.  
+Aplikasi yang sudah di-dockerize dengan MySQL sebagai basis data.
+
+Catatan Tambahan
+
+Untuk menambahkan data awal, Anda dapat menjalankan seeder dengan perintah:  docker-compose exec app php artisan db:seed
+
+
+Saya menyarankan untuk mengatur kata sandi basis data di .env dan docker-compose.yml demi keamanan yang lebih baik.
+File uts_inventory.sql yang saya sertakan berisi struktur tabel beserta data yang telah saya gunakan untuk pengujian, sehingga Anda dapat langsung mengimpornya jika tidak ingin menjalankan migrasi dan seeder.
+

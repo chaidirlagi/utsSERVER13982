@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('cascade');
-            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
+            $table->foreignId('created_by')->nullable()->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('contact_info', 100)->nullable();
-            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+// app/Http/Controllers/CategoryController.php
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -10,17 +11,22 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json($categories);
+        return view('categories.index', compact('categories'));
+    }
+
+    public function create()
+    {
+        return view('categories.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'nullable|string',
         ]);
 
-        $category = Category::create($validated);
-        return response()->json($category, 201);
+        Category::create($request->all());
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 }

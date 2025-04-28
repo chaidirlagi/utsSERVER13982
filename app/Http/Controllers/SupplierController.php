@@ -1,5 +1,6 @@
 <?php
 
+// app/Http/Controllers/SupplierController.php
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
@@ -10,17 +11,22 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
-        return response()->json($suppliers);
+        return view('suppliers.index', compact('suppliers'));
+    }
+
+    public function create()
+    {
+        return view('suppliers.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:100',
             'contact_info' => 'nullable|string|max:100',
         ]);
 
-        $supplier = Supplier::create($validated);
-        return response()->json($supplier, 201);
+        Supplier::create($request->all());
+        return redirect()->route('suppliers.index')->with('success', 'Supplier created successfully.');
     }
 }
